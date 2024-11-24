@@ -55,17 +55,17 @@ app.get("/notes",async(request,response) => {
 
 app.put("/notes/:id",async(request,response) => {
     const {id} = request.params;
-    console.log("ID:",id)
+    // console.log("ID:",id)
     const {title,description,category} = request.body;
-    console.log(request.body)
-    const updateNoteQuery = `
-        UPDATE notes 
+    // console.log(request.body)
+    const updateNoteQueryLatest = `
+    UPDATE notes 
         SET 
             title='${title}',
             description='${description}',
             category='${category}'
-        WHERE id=${id}`;
-    await database.run(updateNoteQuery)
+        WHERE id=${id};`;
+    await database.run(updateNoteQueryLatest)
     response.send("Note updated Successfully")
 
 })
@@ -76,6 +76,10 @@ app.get("/notes/:id",async(request,response) => {
     const {id} = request.params;
     const getNote = `SELECT * FROM notes WHERE id=${id}`;
     const allNotesResponse = await database.get(getNote);
+    if(allNotesResponse === undefined){
+        response.status(404)
+        response.send("Invalid note Id")
+    }
     response.send(allNotesResponse)
 })
 

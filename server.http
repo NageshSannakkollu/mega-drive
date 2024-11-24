@@ -1,24 +1,4 @@
 GET http://localhost:3006/notes
 
 ###
-POST http://localhost:3006/notes 
-Content-Type: application/json
-
-{
-    "title":"Gym",
-    "description":"Daily 1hr",
-    "category":"Personal"
-}
-
-###
 GET http://localhost:3006/notes/1
-
-###
-PUT http://localhost:3006/notes/1 
-Content-Type: application/json
-
-{
-    "title":"Gym",
-    "description":"Daily 1hr",
-    "category":"Done"
-}
